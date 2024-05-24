@@ -5,11 +5,18 @@ import { MatCardModule } from '@angular/material/card';
 import { CoursesService } from './services/courses.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-terms',
   standalone: true,
-  imports: [ MatTableModule, MatCardModule ],
+  imports: [
+    MatTableModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    CommonModule
+  ],
   providers: [ HttpClient ],
   templateUrl: './terms.component.html',
   styleUrl: './terms.component.scss'
@@ -21,7 +28,7 @@ export class TermsComponent {
 
   constructor(
     private coursesService: CoursesService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {
     this.courses = coursesService.list();
   }

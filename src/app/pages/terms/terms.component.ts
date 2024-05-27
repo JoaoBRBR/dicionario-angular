@@ -1,38 +1,41 @@
 import { Component } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
 import { Course } from '../../model/course';
-import { MatCardModule } from '@angular/material/card';
 import { CoursesService } from './services/courses.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Observable, catchError, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../shared/shared.module';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-terms',
   standalone: true,
-  imports: [
-    MatTableModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
-    CommonModule
-  ],
-  providers: [ HttpClient ],
+  imports: [SharedModule, CommonModule],
+  providers: [HttpClient],
   templateUrl: './terms.component.html',
-  styleUrl: './terms.component.scss'
+  styleUrl: './terms.component.scss',
 })
-
 export class TermsComponent {
-
-  courses: Observable<Course[]>;
+  public courses: Observable<Course[]>;
 
   constructor(
     private coursesService: CoursesService,
     private http: HttpClient,
+    public dialog: MatDialog
   ) {
-    this.courses = coursesService.list();
+    this.courses = coursesService.list().pipe(
+      catchError((error) => {
+        console.error('Error loading courses', error);
+        this.onError('Error loading courses: ' + error.message);
+        return of([]);
+      })
+    );
   }
 
   displayedColumns: string[] = ['name', 'category'];
 
+  onError(errorMessage: string) {
+    this.dialog.open(ErrorDialogComponent, { data: errorMessage });
+  }
 }

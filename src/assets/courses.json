@@ -3,15 +3,51 @@
     "_id": "1",
     "name": "Course 1",
     "category": "Category 1"
-  },
-  {
-    "_id": "2",
-    "name": "Course 2",
-    "category": "Category 2"
-  },
-  {
-    "_id": "3",
-    "name": "Course 3",
-    "category": "Category 1"
   }
+  ,
+    {
+      "_id": "2",
+      "name": "Course 2",
+      "category": "Front-end"
+    },
+    {
+      "_id": "3",
+      "name": "Course 3",
+      "category": "Back-end"
+    },
+    {
+      "_id": "4",
+      "name": "Course 4",
+      "category": "Front-end"
+    },
+    {
+      "_id": "5",
+      "name": "Course 5",
+      "category": "Back-end"
+    },
+    {
+      "_id": "6",
+      "name": "Course 6",
+      "category": "Front-end"
+    },
+    {
+      "_id": "7",
+      "name": "Course 7",
+      "category": "Back-end"
+    },
+    {
+      "_id": "8",
+      "name": "Course 8",
+      "category": "Front-end"
+    },
+    {
+      "_id": "9",
+      "name": "Course 9",
+      "category": "Back-end"
+    },
+    {
+      "_id": "10",
+      "name": "Course 10",
+      "category": "Front-end"
+    }
 ]

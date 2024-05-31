@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-terms',
@@ -22,7 +23,8 @@ export class TermsComponent {
   constructor(
     private coursesService: CoursesService,
     private http: HttpClient,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {
     this.courses = coursesService.list().pipe(
       catchError((error) => {
@@ -33,9 +35,13 @@ export class TermsComponent {
     );
   }
 
-  displayedColumns: string[] = ['name', 'category'];
+  displayedColumns: string[] = ['name', 'category', 'actions'];
 
   onError(errorMessage: string) {
     this.dialog.open(ErrorDialogComponent, { data: errorMessage });
+  }
+
+  onAdd(){
+    this.router.navigate(['/new']);
   }
 }
